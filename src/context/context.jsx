@@ -4,6 +4,8 @@ export const Context = createContext();
 
 import React from "react";
 import run from "../config/gemini";
+import toast from "react-hot-toast";
+import { WIP } from "../constants/constants";
 
 const ContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
@@ -12,7 +14,14 @@ const ContextProvider = ({ children }) => {
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
   const [resultData, setResultData] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isNewUser, setNewUser] = useState(true);
 
+  const handleWIP = () => {
+    toast(WIP, {
+      icon: "⚠️",
+    });
+  };
   const delayPara = (index, nextWord) => {
     setTimeout(() => {
       setResultData((prev) => prev + nextWord);
@@ -70,6 +79,12 @@ const ContextProvider = ({ children }) => {
     input,
     setInput,
     newChat,
+    WIP,
+    isLoggedIn,
+    setLoggedIn,
+    isNewUser,
+    setNewUser,
+    handleWIP,
   };
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };

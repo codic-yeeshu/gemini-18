@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import "./main.css";
 import { assets } from "../../assets/assets";
 import { Context } from "../../context/context";
+import { CARD_DATA } from "../../constants/constants";
+import { Toaster } from "react-hot-toast";
 
 const Main = () => {
   const {
@@ -12,43 +14,51 @@ const Main = () => {
     resultData,
     setInput,
     input,
+    handleWIP,
+    setLoggedIn,
   } = useContext(Context);
 
   return (
     <div className="main">
       <div className="nav">
         <p>Gemini</p>
-        <img src={assets.user_icon} alt="" />
+        <div style={{ display: "flex", justifyContent: "center", gap: "8px" }}>
+          <img src={assets.blank_dp} alt="" />
+          <button
+            onClick={() => setLoggedIn(false)}
+            style={{
+              borderRadius: "40px",
+              padding: "8px",
+              border: "none",
+              backgroundColor: "lightgrey",
+              cursor: "pointer",
+              fontWeight: "700",
+            }}
+          >
+            Log Out
+          </button>
+        </div>
       </div>
       <div className="main-container">
         {!showResult ? (
           <>
             <div className="greet">
               <p>
-                <span>Hello, Dev.</span>
+                <span>Hello,</span>
               </p>
               <p>How can I help you today?</p>
             </div>
             <div className="cards">
-              <div className="card">
-                <p>Suggest beautiful places to see on an upcoming road trip</p>
-                <img src={assets.compass_icon} alt="" />
-              </div>
-
-              <div className="card">
-                <p>Briefly summerize this concept: urban planning</p>
-                <img src={assets.bulb_icon} alt="" />
-              </div>
-
-              <div className="card">
-                <p>Brainstrom team bonding activities for our work retreat</p>
-                <img src={assets.message_icon} alt="" />
-              </div>
-
-              <div className="card">
-                <p>Improve the readability of the following code</p>
-                <img src={assets.code_icon} alt="" />
-              </div>
+              {CARD_DATA.map((card) => (
+                <div
+                  onClick={() => setInput(card.description)}
+                  key={card.id}
+                  className="card"
+                >
+                  <p>{card.description}</p>
+                  <img src={card.img} alt={card.alt} />
+                </div>
+              ))}
             </div>
           </>
         ) : (
@@ -74,7 +84,7 @@ const Main = () => {
             </div>
           </div>
         )}
-
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="main-bottom">
           <div className="search-box">
             <input
@@ -84,8 +94,9 @@ const Main = () => {
               placeholder="Enter a prompt here"
             />
             <div>
-              <img src={assets.gallery_icon} alt="" />
-              <img src={assets.mic_icon} alt="" />
+              <img onClick={handleWIP} src={assets.gallery_icon} alt="" />
+
+              <img onClick={handleWIP} src={assets.mic_icon} alt="" />
               {input && (
                 <img onClick={() => onSent()} src={assets.send_icon} alt="" />
               )}
