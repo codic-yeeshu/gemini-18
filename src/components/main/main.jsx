@@ -67,7 +67,7 @@ const Main = () => {
           ) : (
             <div className="result">
               <div className="result-title">
-                <img src={assets.user_icon} alt="" />
+                <img src={assets.blank_dp} alt="" />
                 <p>{recentPrompt}</p>
               </div>
               <div className="result-data">
