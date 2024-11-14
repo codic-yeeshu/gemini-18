@@ -1,57 +1,85 @@
 .card {
-  width: 400px;
-  padding: 30px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(76, 175, 80, 0.5);
-  border: 2px solid rgba(76, 175, 80, 0.5);
+  width: 380px;
+  padding: 40px;
+  background-color: #f5f3fa;
+  border-radius: 15px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(128, 90, 213, 0.2);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translate(-50%, -50%) scale(1.02);
+  box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15);
 }
 
 .heading {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  font-size: 1.6em;
+  color: #7c3aed;
 }
+
 .inputField {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 8px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0px 0px 5px rgba(128, 90, 213, 0.3);
+  outline: none;
 }
 
 .button {
-  padding: 10px 20px;
-  background-color: #4caf50;
+  padding: 12px 25px;
+  background-color: #7c3aed;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+  background-color: #6d28d9;
+  transform: translateY(-3px);
 }
 
 .btndiv {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .signInNote {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 0.9em;
+  color: #4b5563;
 }
 
 .anchor {
-  color: #4caf50;
+  color: #7c3aed;
+  text-decoration: none;
+  transition: color 0.3s ease, font-weight 0.3s ease;
 }
+
 .anchor:hover {
   cursor: pointer;
-
-  font-weight: 500;
+  font-weight: 600;
+  color: #6d28d9;
 }
