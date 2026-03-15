@@ -1,12 +1,11 @@
 import { createContext, useState } from "react";
 
 export const Context = createContext();
-
-import React from "react";
 import run from "../config/gemini";
 import toast from "react-hot-toast";
 import { WIP } from "../constants/constants";
 
+// eslint-disable-next-line react/prop-types
 const ContextProvider = ({ children }) => {
   const [input, setInput] = useState("");
   const [recentPrompt, setRecentPrompt] = useState("");
@@ -37,7 +36,10 @@ const ContextProvider = ({ children }) => {
     setResultData("");
     setLoading(true);
     setShowResult(true);
+
     let response;
+    // const currentInput = prompt || input;
+
     if (prompt) {
       response = await run(prompt);
       setRecentPrompt(prompt);
@@ -47,22 +49,23 @@ const ContextProvider = ({ children }) => {
       response = await run(input);
     }
 
-    // const response = await run(input);
-    let responseArray = response.split("**");
-    let newResponse = "";
-    for (let i = 0; i < responseArray.length; i++) {
-      if (i === 0 || i % 2 !== 1) {
-        newResponse += responseArray[i];
-      } else {
-        newResponse += "<strong>" + responseArray[i] + "<strong>";
-      }
+    let formattedResponse = response
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^\* (.*$)/gim, '<li>$1</li>')
+      .replace(/\n/g, '<br/>');
+
+    if (formattedResponse.includes('<li>')) {
+      formattedResponse = formattedResponse.replace(/(<li>.*<\/li>)/gms, '<ul>$1</ul>');
     }
-    let newResponse2 = newResponse.split("*").join("<br/>");
-    let newResponseArray = newResponse2.split(" ");
-    for (let i = 0; i < newResponseArray.length; i++) {
-      const nextWord = newResponseArray[i];
+
+    let responseArray = formattedResponse.split(" ");
+
+    for (let i = 0; i < responseArray.length; i++) {
+      const nextWord = responseArray[i];
       delayPara(i, nextWord + " ");
     }
+
     setLoading(false);
     setInput("");
   };

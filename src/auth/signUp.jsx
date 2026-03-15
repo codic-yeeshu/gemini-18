@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./signUp.module.css";
 import { Context } from "../context/context";
 
@@ -21,7 +21,7 @@ const SignUpPage = () => {
     createUserWithEmailAndPassword(auth, signUpData.email, signUpData.password)
       .then((userCredential) => {
         const user = userCredential.user;
-
+        console.log("Signed up user:", user);
         setNewUser(false);
         return new Promise((resolve) => setTimeout(resolve, 0));
       })
@@ -32,7 +32,6 @@ const SignUpPage = () => {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         // console.error("Error signing up:", error);
         toast.error(`Signup failed. Please try again.[${errorCode}]`, {
           icon: "❌",
@@ -95,7 +94,6 @@ const SignUpPage = () => {
               Signup
             </button>
           </div>
-           
           <div className={styles.signInNote}>
             Already have an Account?
             <a

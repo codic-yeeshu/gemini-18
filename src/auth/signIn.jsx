@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import styles from "./signIn.module.css";
 import { Context } from "../context/context";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -15,6 +15,7 @@ const SignInPage = () => {
     signInWithEmailAndPassword(auth, signInData.email, signInData.password)
       .then((userCredential) => {
         const user = userCredential.user;
+        console.log("Signed in user:", user);
         setLoggedIn(true);
         return new Promise((resolve) => setTimeout(resolve, 0));
       })
@@ -69,7 +70,6 @@ const SignInPage = () => {
               SignIn
             </button>
           </div>
-           
           <div className={styles.signInNote}>
             New User?{" "}
             <a
