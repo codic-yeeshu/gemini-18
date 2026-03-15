@@ -22,7 +22,7 @@ const Main = () => {
     <>
       <div className="main">
         <div className="nav">
-          <p>Gemini</p>
+          <p>Gemini-18</p>
           <div
             style={{ display: "flex", justifyContent: "center", gap: "8px" }}
           >
@@ -105,7 +105,7 @@ const Main = () => {
               </div>
             </div>
             <p className="bottom-info">
-              Gemini may display inaccurate info, including about people, so
+              Gemini-18 may display inaccurate info, including about people, so
               double-check its responses.
             </p>
           </div>
